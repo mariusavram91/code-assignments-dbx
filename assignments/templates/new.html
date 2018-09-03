@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Submit your assignment</h1>
+<form id="postAssignmentForm" method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  <div>
+      <input type="text" placeholder="Your full name" name="candidate" id="candidate" value="{{ assignment.candidate }}" required>
+      Position <select name="position" id="position" required>
+          {% for position in positions %}
+          <option>
+              {{ position }}
+          </option>
+          {% endfor %}
+      </select>
+      <input type="text" placeholder="Email" name="email" id="email" value="{{ assignment.email }}" required>
+      <input type="file" name="assignment_file" required>
+  </div>
+
+  <div>
+      <input type="submit" value="Submit assignment">
+  </div>
+</form>
+{% endblock %}

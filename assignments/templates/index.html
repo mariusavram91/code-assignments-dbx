@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h1>Here's a list with the code assignments.</h1>
+  <a href="{% url 'assignment-new' %}"">Submit new assignment</a>
+  {% for assignment in assignments %}
+    <h2>Candidate name: {{ assignment.candidate }}</h2>
+    <h3>Position: {{ assignment.position }}</h3>
+    <h3>Email: {{ assignment.email }}</h3>
+    <h3>Link to assignment in Dropbox: <a href="#">{{ assignment.dropbox_id }}</a></h3>
+    <h3>Reviewed: {{ assignment.reviewed }}</h3>
+  {% endfor %}
+{% endblock %}
