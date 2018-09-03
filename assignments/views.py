@@ -1,5 +1,5 @@
 from django.views import generic
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
 from assignments.models import Assignment
 
 
@@ -31,6 +31,16 @@ class NewView(generic.CreateView):
     def get_context_data(self, **kwargs):
         context = super(generic.CreateView, self).get_context_data(**kwargs)
 
-        context['positions'] = ['Python Developer', 'Full Stack Developer']
+        context['positions'] = ['Python Developer', 'Full Stack Developer',
+                                'Frontend Developer', 'Software Engineer']
 
         return context
+
+    def post(self, request, *args, **kwargs):
+        form = self.get_form()
+        assignment = form.save()
+
+        assignment.dropbox_id = request.FILES['assignment_file'].name
+        assignment.save()
+
+        return redirect(self.success_url)

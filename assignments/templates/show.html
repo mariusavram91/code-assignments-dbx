@@ -1,5 +1,10 @@
 {% extends 'base.html' %}
 {% block content %}
         <h1>Here's the candidate's assignment.</h1>
-        <h2>{{ assignment.candidate }}</h2>
+        <h2>Candidate name: {{ assignment.candidate }}</h2>
+        <h3>Position: {{ assignment.position }}</h3>
+        <h3>Email: <a href="mailto:{{ assignment.email }}">{{ assignment.email }}</a></h3>
+        <h3>Link to assignment in Dropbox: <a href="#">{{ assignment.dropbox_id }}</a></h3>
+        <h3>Reviewed: <input type="checkbox" {% if assignment.reviewed %} checked {% endif %}><h3>
+        <a href="/">Back</a>
 {% endblock %}

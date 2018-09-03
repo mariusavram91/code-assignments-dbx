@@ -1,3 +1,13 @@
-pip install requirements.txt
+Runs out of the box with:
 
+```
 export DROPBOX_TOKEN='<VALUE_HERE>'
+
+virtualenv .ve &&
+pip install -r requirements.txt &&
+./manage.py syncdb &&
+./manage.py migrate &&
+./manage.py runserver &&
+
+(on python3/sqlite)
+```
