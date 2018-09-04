@@ -1,19 +1,35 @@
 # Dropbox assignments
 
-An app where an applicant can drop their assignments, which are then saved in a
-shared directory in Dropbox. It gives a quick overview of all the available
-assignments.
+An app where an applicant can drop their assignments, which are then saved in a shared directory in Dropbox. It gives a quick overview of all the available assignments.
+
+The current state of the application is not as it would be on production, of course. It would require to lock all the assignments related pages under an admin portal, where the company would be able to check the tasks and mark them as reviewed. As this was not the point of the task, I did not continue working on it.
+
+At the moment you can submit an assignment, which will then be uploaded to a folder in Dropbox (by default it is code_assignments), the path is then saved in the database, which we use to generate shared links for the file.
+
 
 Runs out of the box withp python3/sqlite:
 
+First get your token from Dropbox and export it as an environment variable.
 ```
 export DROPBOX_TOKEN='<VALUE_HERE>'
+```
 
+Then:
+```
 virtualenv --python=/usr/bin/python3 env &&
 source ./env/bin/activate &&
-pip install -r requirements.txt &&
-./manage.py syncdb &&
-./manage.py migrate &&
-./manage.py runserver &&
+pip3 install -r requirements.txt &&
+python manage.py syncdb &&
+python manage.py migrate &&
+python manage.py runserver &&
 
 ```
+
+You can use
+
+```
+python manage.py test
+```
+to run the tests.
+
+Then go to http://127.0.0.1:8000/ to see or submit assignments.
