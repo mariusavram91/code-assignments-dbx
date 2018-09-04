@@ -1,13 +1,19 @@
-Runs out of the box with:
+# Dropbox assignments
+
+An app where an applicant can drop their assignments, which are then saved in a
+shared directory in Dropbox. It gives a quick overview of all the available
+assignments.
+
+Runs out of the box withp python3/sqlite:
 
 ```
 export DROPBOX_TOKEN='<VALUE_HERE>'
 
-virtualenv .ve &&
+virtualenv --python=/usr/bin/python3 env &&
+source ./env/bin/activate &&
 pip install -r requirements.txt &&
 ./manage.py syncdb &&
 ./manage.py migrate &&
 ./manage.py runserver &&
 
-(on python3/sqlite)
 ```

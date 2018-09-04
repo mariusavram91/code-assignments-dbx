@@ -1,5 +1,6 @@
 from django.views import generic
 from django.shortcuts import get_object_or_404, redirect
+from dbx.services import Dropbox
 from assignments.models import Assignment
 
 
@@ -17,7 +18,12 @@ class ShowView(generic.DetailView):
 
     def get_object(self, queryset=None):
         pk = self.kwargs.get(self.pk_url_kwarg, None)
-        return get_object_or_404(Assignment, pk=pk)
+        assignment = get_object_or_404(Assignment, pk=pk)
+
+        dropbox = Dropbox()
+        assignment.link = dropbox.get_file_link(assignment.dropbox_id)
+
+        return assignment
 
 
 class NewView(generic.CreateView):
@@ -40,7 +46,11 @@ class NewView(generic.CreateView):
         form = self.get_form()
         assignment = form.save()
 
-        assignment.dropbox_id = request.FILES['assignment_file'].name
+        dropbox = Dropbox()
+        assignment.dropbox_id = dropbox.upload_file(
+            request.FILES['assignment_file'],
+            request.POST['candidate']
+        )
         assignment.save()
 
         return redirect(self.success_url)

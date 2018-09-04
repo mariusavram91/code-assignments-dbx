@@ -120,4 +120,5 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-DROPBOX_KEY = os.environ.get('DROPBOX_KEY')
+DROPBOX_TOKEN = os.environ.get('DROPBOX_TOKEN', None)
+DROPBOX_PATH = os.environ.get('DROPBOX_PATH', '/code_assignments/')
